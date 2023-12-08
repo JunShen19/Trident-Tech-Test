@@ -1,8 +1,26 @@
 import "@/App.css";
 import banner from "@/assets/banner.png";
-import MenuItems from "@/components/MenuItems";
+import { useState, useRef } from "react";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const menuItems = useRef(null);
+  const navBar = useRef(null);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+    menuItems.current.classList.toggle("menu-open");
+    navBar.current.classList.toggle("active");
+  };
+
+  const navItems = [
+    "白頭翁的特性",
+    "白頭翁的故事",
+    "白頭翁的美照",
+    "白頭翁的危機",
+  ];
+
   const paragraphs = [
     {
       title: "外 觀",
@@ -24,19 +42,94 @@ function App() {
   return (
     <div className="main-container">
       <div className="sidebar">
-        <div className="icon" style={{ zIndex: 1 }}>
-          <div className="bird-eyes"></div>
-          <div className="bird-beak">
-            <div className="white1"></div>
-            <div className="white2"></div>
-            <div className="white3"></div>
+        <div className="content" ref={navBar}>
+          <div className="icon" style={{ zIndex: 1 }}>
+            <div className="bird-eyes"></div>
+            <div className="bird-beak">
+              <div className="white1"></div>
+              <div className="white2"></div>
+              <div className="white3"></div>
+            </div>
+            <div className="bird-head">
+              <div className="white1"></div>
+            </div>
           </div>
-          <div className="bird-head">
-            <div className="white1"></div>
-          </div>
+          <p className="title">白頭翁不吃小米</p>
+          <button className="menu-toggle" onClick={handleToggle}>
+            {isOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="23"
+                viewBox="0 0 25 23"
+                fill="none"
+              >
+                <line
+                  y1="-2"
+                  x2="28.6924"
+                  y2="-2"
+                  transform="matrix(0.730323 0.683102 -0.702025 0.712152 0.379639 2.8696)"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+                <line
+                  y1="-2"
+                  x2="28.0896"
+                  y2="-2"
+                  transform="matrix(0.716329 -0.697763 0.716329 0.697763 3.2583 22.4695)"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="23"
+                viewBox="0 0 25 23"
+                fill="none"
+              >
+                <line
+                  x1="0.379578"
+                  y1="2.8696"
+                  x2="24.3796"
+                  y2="2.8696"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+                <line
+                  x1="0.379578"
+                  y1="20.8696"
+                  x2="24.3796"
+                  y2="20.8696"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+                <line
+                  x1="0.379578"
+                  y1="11.8696"
+                  x2="15.6523"
+                  y2="11.8696"
+                  stroke="black"
+                  strokeWidth="4"
+                />
+              </svg>
+            )}
+          </button>
         </div>
-        <p className="title">白頭翁不吃小米</p>
-        <MenuItems />
+        <div className="menu-items" ref={menuItems}>
+          {navItems.map((item, index) => (
+            <p
+              className={index === selected ? "item selected" : "item"}
+              key={index}
+              onClick={() => {
+                setSelected(index);
+              }}
+            >
+              {item}
+            </p>
+          ))}
+        </div>
       </div>
 
       <div className="main-content">
@@ -49,7 +142,7 @@ function App() {
               width: "200%",
               height: "200%",
               objectFit: "cover",
-              transform: "translateY(-25%) translateX(-30%)", // 负值表示向左移动，可以根据需要调整百分比
+              transform: "translateY(-25%) translateX(-25%)",
             }} // 使圖片填滿整個 banner
           />
           <div className="content">
