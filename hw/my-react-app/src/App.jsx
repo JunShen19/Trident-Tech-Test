@@ -43,15 +43,31 @@ function App() {
     <div className="main-container">
       <div className="sidebar">
         <div className="content" ref={navBar}>
-          <div className="icon" style={{ zIndex: 1 }}>
-            <div className="bird-eyes"></div>
-            <div className="bird-beak">
-              <div className="white1"></div>
-              <div className="white2"></div>
-              <div className="white3"></div>
-            </div>
-            <div className="bird-head">
-              <div className="white1"></div>
+          <div
+            className="icon"
+            style={
+              {
+                // zIndex: 1,
+              }
+            }
+          >
+            <div
+              style={{
+                position: "relative",
+                marginLeft: "0.5rem",
+                marginTop: "0.75rem",
+                transform: `scale(1.2)`,
+              }}
+            >
+              <div className="bird-eyes"></div>
+              <div className="bird-beak">
+                <div className="white1"></div>
+                <div className="white2"></div>
+                <div className="white3"></div>
+              </div>
+              <div className="bird-head">
+                <div className="white1"></div>
+              </div>
             </div>
           </div>
           <p className="title">白頭翁不吃小米</p>
@@ -137,13 +153,7 @@ function App() {
           <img
             src={banner} // 替換成你的圖片 URL
             alt="Banner Image"
-            style={{
-              zIndex: -2,
-              width: "200%",
-              height: "200%",
-              objectFit: "cover",
-              transform: "translateY(-25%) translateX(-25%)",
-            }} // 使圖片填滿整個 banner
+            className="image"
           />
           <div className="content">
             <p className="title">白頭翁 (Chinese bulbul)</p>
